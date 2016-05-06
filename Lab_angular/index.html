@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+div {
+  transition: all linear 0.5s;
+  background-color: lightblue;
+  height: 150px;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
+}
+
+</style>
+<script src="./lib/angular-1.5.5/angular.min.js"></script>
+<script src="./lib/angular-1.5.5/angular-animate.min.js"></script>
+<script type="./css/index.css"></script>
+<script type="./js/index.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<h4>价格计算器: <input type="checkbox" ng-model="myCheck"></h4>
+
+<div ng-hide="myCheck" data-ng-app="" data-ng-init="quantity=0;price=0" >
+
+<h2>价格计算器</h2>
+
+数量: <input type="number" ng-model="quantity">
+价格: <input type="number" ng-model="price">
+
+<p><b>总价:</b> {{quantity * price | currency}}</p>
+
+</div>
+
+
+<h4>邮箱验证: <input type="checkbox" ng-model="myCheck2"></h4>
+
+<div ng-hide="myCheck2">
+
+<h2>邮箱检查</h2>
+
+<form ng-app="" name="myForm">
+    Email:
+    <input type="email" name="myAddress" ng-model="text">
+    <span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+</form>
+
+</div>
+
+
+<h4>时钟: <input type="checkbox" ng-model="myCheck3"></h4>
+
+<div  ng-hide="myCheck3"> 
+
+<p>现在时间:</p>
+
+<h1>{{theTime}}</h1>
+
+</div>
+
+
+
+
+
+<script>
+var app = angular.module('myApp', ['ngAnimate']);
+app.controller('myCtrl', function($scope, $interval) {
+  $scope.theTime = new Date().toLocaleTimeString();
+  $interval(function () {
+      $scope.theTime = new Date().toLocaleTimeString();
+  }, 1000);
+});
+</script>
+
+
+
+
+</body>
+</html>
